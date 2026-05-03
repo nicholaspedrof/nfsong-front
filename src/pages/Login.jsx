@@ -1,27 +1,74 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "@/styles/styles.css";
+
+const USERS_KEY = "nfsong_users";
+const SESSION_KEY = "nfsong_session";
+
+const SESSION_DURATION = 1000 * 60 * 60 * 2;
 
 export function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", senha: "" });
+
+  const [form, setForm] = useState({
+    email: "",
+    senha: ""
+  });
+
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function getUsers() {
+    const users = localStorage.getItem(USERS_KEY);
+    return users ? JSON.parse(users) : [];
+  }
+
   async function handleSubmit() {
     setErro("");
-    if (!form.email || !form.senha) { setErro("Preencha todos os campos."); return; }
+
+    const email = form.email.trim().toLowerCase();
+    const senha = form.senha;
+
+    if (!email || !senha) {
+      setErro("Preencha todos os campos.");
+      return;
+    }
+
     setCarregando(true);
+
     try {
-      // const data = await login(form.email, form.senha);
-      // localStorage.setItem("token", data.token);
+      const users = getUsers();
+
+      const user = users.find(
+        (u) => u.email === email && u.senha === senha
+      );
+
+      if (!user) {
+        setErro("Email ou senha inválidos.");
+        return;
+      }
+
+      const session = {
+        user: {
+          id: user.id,
+          nome: user.nome,
+          email: user.email,
+          dataNascimento: user.dataNascimento
+        },
+        expiresAt: Date.now() + SESSION_DURATION
+      };
+
+      localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+
       navigate("/");
-    } catch (err) {
-      setErro("Email ou senha inválidos.");
+    } catch {
+      setErro("Erro ao entrar. Tente novamente.");
     } finally {
       setCarregando(false);
     }
@@ -30,7 +77,6 @@ export function Login() {
   return (
     <div className="auth-page">
 
-      {/* Lado esquerdo — imagem sunset estilo Netflix */}
       <div className="auth-visual">
         <div className="auth-visual-img" />
         <div className="auth-visual-fade" />
@@ -41,10 +87,11 @@ export function Login() {
         </div>
       </div>
 
-      {/* Lado direito — formulário */}
       <div className="auth-form-side">
         <div className="auth-card">
-          <h1 className="auth-title">Entre na <span>rede</span></h1>
+          <h1 className="auth-title">
+            Entre na <span>rede</span>
+          </h1>
           <p className="auth-subtitle">acesse sua conta</p>
           <div className="auth-divider" />
 
@@ -52,23 +99,52 @@ export function Login() {
 
           <div className="auth-field">
             <label className="auth-label">Email</label>
-            <input className="auth-input" type="email" name="email"
-              placeholder="seu@email.com" value={form.email} onChange={handleChange} />
+            <input
+              className="auth-input"
+              type="email"
+              name="email"
+              placeholder="seu@email.com"
+              value={form.email}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="auth-field">
             <label className="auth-label">Senha</label>
-            <input className="auth-input" type="password" name="senha"
-              placeholder="••••••••" value={form.senha} onChange={handleChange} />
+
+            <div className="input-password-wrapper">
+              <input
+                className="auth-input"
+                type={mostrarSenha ? "text" : "password"}
+                name="senha"
+                placeholder="••••••••"
+                value={form.senha}
+                onChange={handleChange}
+              />
+
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+              >
+                {mostrarSenha ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
-          <button className="auth-btn" onClick={handleSubmit} disabled={carregando}>
+          <button
+            className="auth-btn"
+            onClick={handleSubmit}
+            disabled={carregando}
+          >
             {carregando ? "Conectando..." : "Entrar"}
           </button>
 
           <p className="auth-redirect">
             Não tem conta?{" "}
-            <Link to="/Register" className="auth-link">Cadastre-se</Link>
+            <Link to="/register" className="auth-link">
+              Cadastre-se
+            </Link>
           </p>
         </div>
       </div>

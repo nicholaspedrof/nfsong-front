@@ -146,7 +146,7 @@ body::before {
   background: transparent;
   border: 1px solid rgba(255, 208, 0, 0.3);
   color: var(--yellow);
-  padding: 8px 20px;
+  padding: 10px 30px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -166,7 +166,7 @@ body::before {
   background: linear-gradient(135deg, var(--pink), var(--orange));
   border: none;
   color: #fff;
-  padding: 8px 20px;
+  padding: 10px 20px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -309,13 +309,13 @@ body::before {
   align-items: flex-end;
   justify-content: center;
   gap: 4px;
-  height: 32px;
+  height: 100px;
 }
 
 .wave-bar {
   display: block;
   width: 3px;
-  border-radius: 2px;
+  border-radius: 3px;
   animation: onda 1.2s ease-in-out infinite alternate;
 }
 
@@ -560,7 +560,7 @@ audio {
   justify-content: center;
   gap: 16px;
   font-family: 'Rajdhani', sans-serif;
-  font-size: 10px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--lavender);
   text-transform: uppercase;
@@ -974,6 +974,208 @@ audio {
     0 0 40px rgba(255, 107, 0, 0.08);
 }
 
+.profile-page {
+  min-height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background:
+    radial-gradient(circle at top, rgba(255, 107, 0, 0.09), transparent 35%),
+    var(--bg);
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 620px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--orange);
+  padding: 42px;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45),
+    0 0 38px rgba(255, 107, 0, 0.08);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.profile-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), var(--orange), var(--yellow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: #fff;
+  box-shadow: 0 0 28px rgba(255, 107, 0, 0.35);
+}
+
+.profile-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.profile-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 62px;
+  line-height: 1;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, var(--yellow), var(--orange), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile-divider {
+  height: 1px;
+  margin: 32px 0;
+  background: linear-gradient(to right, var(--pink), var(--orange), transparent);
+}
+
+.profile-info {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-info-item {
+  padding: 18px 20px;
+  background: rgba(255, 208, 0, 0.03);
+  border-left: 2px solid rgba(255, 107, 0, 0.45);
+}
+
+.profile-info-item span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.profile-info-item strong {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.profile-logout-btn {
+  width: 100%;
+  margin-top: 32px;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  border: none;
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.profile-logout-btn:hover {
+  box-shadow: 0 0 24px rgba(255, 107, 0, 0.45);
+}
+
+.hero-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.info-section {
+  width: min(1100px, 92%);
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.info-card span {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--yellow);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.info-card h3 {
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.info-card p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.search-title {
+  margin-top: 18px;
+  text-align: center;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.search-description {
+  width: min(680px, 90%);
+  margin: 12px auto 28px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .info-section {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 28px 20px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-title {
+    font-size: 48px;
+  }
+}
+
 @keyframes slideUp {
   from { transform: translateY(24px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
@@ -1092,6 +1294,42 @@ audio {
 .modal-deezer-btn:hover {
   background: rgba(255, 107, 0, 0.08);
   box-shadow: 0 0 16px rgba(255, 107, 0, 0.25);
+}
+
+/* 👁️ senha com ícone */
+.input-password-wrapper {
+  position: relative;
+}
+
+.input-password-wrapper .auth-input {
+  padding-right: 42px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--yellow);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: var(--orange);
+}
+
+.navbar-user-name {
+  margin-right: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--yellow);
+  white-space: nowrap;
 }
 
 /* ── RESPONSIVIDADE ── */
