@@ -10,7 +10,7 @@ export function PublicRoute({ children }) {
       const session = JSON.parse(sessionData);
 
       if (session.expiresAt && Date.now() < session.expiresAt) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/app" replace />;
       }
     } catch {
       localStorage.removeItem(SESSION_KEY);

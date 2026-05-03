@@ -7,24 +7,14 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 import { PublicRoute } from "./routes/PublicRoute";
 import AppDashboard from "./pages/AppDashboard";
 
-<Route
-  path="/app"
-  element={
-    <PrivateRoute>
-      <AppDashboard />
-    </PrivateRoute>
-  }
-/>
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* ROTA RAIZ */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* ROTA RAIZ → landing page */}
+        <Route path="/" element={<Navigate to="/home" replace />} />
 
         {/* ROTAS PÚBLICAS */}
-
         <Route
           path="/home"
           element={
@@ -49,8 +39,16 @@ function App() {
             </PublicRoute>
           }
         />
-      
+
         {/* ROTAS PRIVADAS */}
+        <Route
+          path="/app"
+          element={
+            <PrivateRoute>
+              <AppDashboard />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/profile"
           element={
@@ -59,17 +57,9 @@ function App() {
             </PrivateRoute>
           }
         />
-          <Route
-            path="/app"
-            element={
-              <PrivateRoute>
-                <AppDashboard />
-              </PrivateRoute>
-            }
-          />
 
         {/* ROTA NÃO ENCONTRADA */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </BrowserRouter>
   );

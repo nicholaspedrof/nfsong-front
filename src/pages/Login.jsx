@@ -5,17 +5,12 @@ import "@/styles/styles.css";
 
 const USERS_KEY = "nfsong_users";
 const SESSION_KEY = "nfsong_session";
-
 const SESSION_DURATION = 1000 * 60 * 60 * 2;
 
 export function Login() {
   const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    email: "",
-    senha: ""
-  });
-
+  const [form, setForm] = useState({ email: "", senha: "" });
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -31,7 +26,6 @@ export function Login() {
 
   async function handleSubmit() {
     setErro("");
-
     const email = form.email.trim().toLowerCase();
     const senha = form.senha;
 
@@ -44,10 +38,7 @@ export function Login() {
 
     try {
       const users = getUsers();
-
-      const user = users.find(
-        (u) => u.email === email && u.senha === senha
-      );
+      const user = users.find((u) => u.email === email && u.senha === senha);
 
       if (!user) {
         setErro("Email ou senha inválidos.");
@@ -59,14 +50,13 @@ export function Login() {
           id: user.id,
           nome: user.nome,
           email: user.email,
-          dataNascimento: user.dataNascimento
+          dataNascimento: user.dataNascimento,
         },
-        expiresAt: Date.now() + SESSION_DURATION
+        expiresAt: Date.now() + SESSION_DURATION,
       };
 
       localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-
-      navigate("/");
+      navigate("/app");
     } catch {
       setErro("Erro ao entrar. Tente novamente.");
     } finally {
@@ -75,19 +65,18 @@ export function Login() {
   }
 
   return (
-    <div className="auth-page">
+    <div className="auth-fullpage">
+      {/* FUNDO */}
+      <div className="auth-bg" />
+      <div className="auth-bg-fade" />
 
-      <div className="auth-visual">
-        <div className="auth-visual-img" />
-        <div className="auth-visual-fade" />
-        <div className="auth-visual-fade-bottom" />
-        <div className="auth-visual-text">
-          <h2>NFSong</h2>
-          <p>Sua música mais perto de você</p>
-        </div>
+      {/* LOGO TOPO ESQUERDO */}
+      <div className="auth-logo-corner">
+        <img src="/logo-nf.png" alt="NFSong" className="auth-logo-img" />
       </div>
 
-      <div className="auth-form-side">
+      {/* FORM CENTRALIZADO */}
+      <div className="auth-center">
         <div className="auth-card">
           <h1 className="auth-title">
             Entre na <span>rede</span>
@@ -111,7 +100,6 @@ export function Login() {
 
           <div className="auth-field">
             <label className="auth-label">Senha</label>
-
             <div className="input-password-wrapper">
               <input
                 className="auth-input"
@@ -121,7 +109,6 @@ export function Login() {
                 value={form.senha}
                 onChange={handleChange}
               />
-
               <button
                 type="button"
                 className="password-toggle"
@@ -148,7 +135,6 @@ export function Login() {
           </p>
         </div>
       </div>
-
     </div>
   );
 }
