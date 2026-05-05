@@ -1,0 +1,573 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:          #0D0520;
+  --surface:     #130830;
+  --card-bg:     #0A0520;
+  --pink:        #FF2D78;
+  --orange:      #FF6B00;
+  --yellow:      #FFD000;
+  --cyan:        #00E5FF;
+  --purple:      #6B0FA8;
+  --lavender:    #C084FC;
+  --white:       #F0E6FF;
+  --muted:       #7B6890;
+  --border:      rgba(255, 45, 120, 0.15);
+
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+
+  --spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ════════════════════════════════════════════
+   profile-page: apenas padding + background
+   O layout de 2 colunas fica no .profile-layout
+   (filho direto, não afetado pelo flex column do wrapper)
+════════════════════════════════════════════ */
+.profile-page {
+  padding: 48px 40px 80px;
+  background:
+    radial-gradient(ellipse at 20% 0%,   rgba(255, 107, 0, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 50%, rgba(107, 15, 168, 0.07) 0%, transparent 50%),
+    var(--bg);
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT DE 2 COLUNAS — sidebar + main
+════════════════════════════════════════════ */
+.profile-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+}
+
+/* ════════════════════════════════════════════
+   SIDEBAR ESQUERDA
+════════════════════════════════════════════ */
+.profile-sidebar {
+  width: 300px;
+  min-width: 300px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--orange);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(255, 107, 0, 0.06);
+}
+
+.profile-sidebar::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.profile-sidebar::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(255, 45, 120, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink), var(--orange), var(--yellow));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  color: #fff;
+  flex-shrink: 0;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 0, 0.2),
+    0 0 28px rgba(255, 107, 0, 0.3);
+  transition: box-shadow 0.4s var(--ease-out), transform 0.4s var(--spring);
+}
+
+.profile-avatar:hover {
+  box-shadow:
+    0 0 0 4px rgba(255, 208, 0, 0.35),
+    0 0 36px rgba(255, 107, 0, 0.45);
+  transform: scale(1.05);
+}
+
+.profile-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, var(--yellow), var(--orange), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 16px rgba(255, 107, 0, 0.25));
+  position: relative;
+  z-index: 1;
+}
+
+.profile-divider {
+  height: 1px;
+  width: 100%;
+  margin: 28px 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 45, 120, 0.4) 30%,
+    rgba(255, 107, 0, 0.4) 70%,
+    transparent
+  );
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.profile-info-item {
+  padding: 14px 16px;
+  background: rgba(255, 208, 0, 0.02);
+  border-left: 2px solid rgba(255, 107, 0, 0.35);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  transition:
+    background   0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out),
+    transform    0.3s  var(--spring);
+}
+
+.profile-info-item:hover {
+  background: rgba(255, 107, 0, 0.05);
+  border-left-color: var(--orange);
+  transform: translateX(4px);
+}
+
+.profile-info-item span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.profile-info-item strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.profile-saved-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 24px;
+  padding: 13px 16px;
+  background: rgba(0, 229, 255, 0.04);
+  border: 1px solid rgba(0, 229, 255, 0.12);
+  border-radius: var(--radius-md);
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.profile-saved-count:hover {
+  background: rgba(0, 229, 255, 0.07);
+  border-color: rgba(0, 229, 255, 0.22);
+}
+
+.profile-logout-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px 16px;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition:
+    box-shadow 0.3s var(--ease-out),
+    transform  0.35s var(--spring),
+    opacity    0.2s;
+}
+
+.profile-logout-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.profile-logout-btn:hover::after { transform: translateX(100%); }
+
+.profile-logout-btn:hover {
+  box-shadow: 0 0 28px rgba(255, 107, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.profile-logout-btn:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* ════════════════════════════════════════════
+   MAIN — coluna direita
+════════════════════════════════════════════ */
+.profile-main {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lavender);
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  margin-bottom: 28px;
+}
+
+.label-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(192, 132, 252, 0.35), transparent);
+}
+
+.label-line:first-child {
+  background: linear-gradient(to left, rgba(192, 132, 252, 0.35), transparent);
+}
+
+/* ════════════════════════════════════════════
+   SEARCH BAR
+════════════════════════════════════════════ */
+.saved-search-wrapper {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.saved-search-inner {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(255, 107, 0, 0.18);
+  border-radius: 50px;
+  padding: 5px 10px 5px 20px;
+  gap: 12px;
+  transition:
+    border-color 0.35s var(--ease-out),
+    background   0.35s var(--ease-out),
+    box-shadow   0.4s  var(--ease-out);
+}
+
+.saved-search-inner:focus-within {
+  border-color: var(--orange);
+  background: rgba(255, 107, 0, 0.04);
+  box-shadow:
+    0 0 0 4px rgba(255, 107, 0, 0.07),
+    0 8px 28px rgba(255, 107, 0, 0.10);
+}
+
+.saved-search-icon {
+  color: var(--muted);
+  font-size: 13px;
+  flex-shrink: 0;
+  transition: color 0.3s;
+}
+
+.saved-search-inner:focus-within .saved-search-icon { color: var(--orange); }
+
+.saved-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 9px 0;
+}
+
+.saved-search-input::placeholder { color: rgba(255, 255, 255, 0.18); font-weight: 400; }
+.saved-search-input:focus { outline: none; }
+
+.saved-search-clear {
+  background: transparent;
+  border: 1px solid rgba(255, 45, 120, 0.2);
+  border-radius: 50%;
+  color: var(--muted);
+  width: 24px; height: 24px;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.3s var(--spring);
+}
+
+.saved-search-clear:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+  background: rgba(255, 45, 120, 0.08);
+  transform: scale(1.15) rotate(90deg);
+}
+
+.saved-search-result-info {
+  margin-top: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.saved-search-result-info strong { color: var(--orange); font-weight: 600; }
+
+/* ════════════════════════════════════════════
+   MUSIC LIST
+════════════════════════════════════════════ */
+.music-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.music-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 45, 120, 0.07);
+  cursor: pointer;
+  transition: background 0.2s var(--ease-out);
+}
+
+.music-list-item:last-child { border-bottom: none; }
+.music-list-item:hover { background: rgba(255, 107, 0, 0.05); }
+
+.music-list-index {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: rgba(123, 104, 144, 0.35);
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.music-list-item:hover .music-list-index { color: var(--orange); }
+
+.music-list-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: saturate(1.1) brightness(0.88);
+  transition: filter 0.3s, transform 0.3s var(--spring);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+.music-list-item:hover .music-list-cover {
+  filter: saturate(1.4) brightness(1);
+  transform: scale(1.07);
+}
+
+.music-list-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.music-list-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+
+.music-list-item:hover .music-list-title { color: var(--yellow); }
+
+.music-list-artist {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-list-album {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  color: rgba(123, 104, 144, 0.6);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  max-width: 160px;
+}
+
+.music-list-play-hint {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: transparent;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.music-list-item:hover .music-list-play-hint { color: var(--yellow); }
+
+.music-list-remove-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 45, 120, 0.15);
+  border-radius: 50%;
+  width: 30px; height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  opacity: 0;
+  transition:
+    color        0.25s,
+    border-color 0.25s,
+    background   0.25s,
+    transform    0.35s var(--spring),
+    opacity      0.2s;
+}
+
+.music-list-item:hover .music-list-remove-btn { opacity: 1; }
+
+.music-list-remove-btn:hover {
+  color: var(--pink);
+  border-color: var(--pink);
+  background: rgba(255, 45, 120, 0.1);
+  transform: scale(1.2);
+}
+
+/* ── Empty state ── */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+}
+
+.empty-icon {
+  font-size: 36px;
+  margin-bottom: 14px;
+  opacity: 0.2;
+  color: var(--orange);
+}
+
+/* ════════════════════════════════════════════
+   RESPONSIVO
+════════════════════════════════════════════ */
+@media (max-width: 960px) {
+  .profile-page { padding: 32px 20px 60px; }
+
+  .profile-layout {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .profile-sidebar {
+    width: 100%;
+    min-width: unset;
+    position: static;
+  }
+
+  .music-list-album { display: none; }
+}
+
+@media (max-width: 600px) {
+  .profile-sidebar { padding: 24px 16px; }
+  .profile-title { font-size: 42px; }
+  .music-list-play-hint { display: none; }
+  .music-list-remove-btn { opacity: 1; }
+}

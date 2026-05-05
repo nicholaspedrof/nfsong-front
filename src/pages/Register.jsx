@@ -80,9 +80,8 @@ export function Register() {
       };
 
       saveUsers([...users, novoUsuario]);
-
       navigate("/login");
-    } catch (err) {
+    } catch {
       setErro("Erro ao criar conta. Tente novamente.");
     } finally {
       setCarregando(false);
@@ -90,20 +89,22 @@ export function Register() {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-visual">
-        <div className="auth-visual-img" />
-        <div className="auth-visual-fade" />
-        <div className="auth-visual-fade-bottom" />
-        <div className="auth-visual-text">
-          <h2>NFSong</h2>
-          <p>Junte-se à rede</p>
-        </div>
+    <div className="auth-fullpage">
+      {/* FUNDO */}
+      <div className="auth-bg" />
+      <div className="auth-bg-fade" />
+
+      {/* LOGO TOPO ESQUERDO */}
+      <div className="auth-logo-corner">
+        <img src="/logo-nf.png" alt="NFSong" className="auth-logo-img" />
       </div>
 
-      <div className="auth-form-side">
+      {/* FORM CENTRALIZADO */}
+      <div className="auth-center">
         <div className="auth-card">
-          <h1 className="auth-title">Criar <span>conta</span></h1>
+          <h1 className="auth-title">
+            Criar <span>conta</span>
+          </h1>
           <p className="auth-subtitle">comece agora</p>
           <div className="auth-divider" />
 
@@ -146,7 +147,6 @@ export function Register() {
 
           <div className="auth-field">
             <label className="auth-label">Senha</label>
-
             <div className="input-password-wrapper">
               <input
                 className="auth-input"
@@ -156,7 +156,6 @@ export function Register() {
                 value={form.senha}
                 onChange={handleChange}
               />
-
               <button
                 type="button"
                 className="password-toggle"
@@ -170,7 +169,6 @@ export function Register() {
 
           <div className="auth-field">
             <label className="auth-label">Confirmar senha</label>
-
             <div className="input-password-wrapper">
               <input
                 className="auth-input"
@@ -180,12 +178,11 @@ export function Register() {
                 value={form.confirmar}
                 onChange={handleChange}
               />
-
               <button
                 type="button"
                 className="password-toggle"
                 onClick={() => setMostrarConfirmar(!mostrarConfirmar)}
-                aria-label={mostrarConfirmar ? "Ocultar confirmação de senha" : "Mostrar confirmação de senha"}
+                aria-label={mostrarConfirmar ? "Ocultar confirmação" : "Mostrar confirmação"}
               >
                 {mostrarConfirmar ? <FaEyeSlash /> : <FaEye />}
               </button>
